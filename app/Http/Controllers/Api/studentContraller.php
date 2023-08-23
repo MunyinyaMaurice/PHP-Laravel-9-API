@@ -65,4 +65,41 @@ return response() ->json([
 'error message'=>"There is no such student!"],404);
 }
 }
+public function updateById(Request $request, $id) {
+    // Call showById function to check if the student exists
+    $showResponse = $this->showById($id);
+
+    if ($showResponse->getStatusCode() === 200) {
+        // If student exists, update the data
+        $student = studentModel::find($id);
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:191',
+            'course' => 'required|string|max:191',
+            'email' => 'required|email|max:191',
+            'phone' => 'required|digits:10',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 422,
+                'errors' => $validator->messages()
+            ], 422);
+        } else {
+            $student->update([
+                'name' => $request->name,
+                'course' => $request->course,
+                'email' => $request->email,
+                'phone' => $request->phone,
+            ]);
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Student updated successfully!'
+            ], 200);
+        }
+    } else {
+        return $showResponse;
+    }
+}
 }
