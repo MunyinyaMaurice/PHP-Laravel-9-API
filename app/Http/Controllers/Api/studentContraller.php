@@ -53,4 +53,8 @@ return response() ->json(['status'=>500,
     }
 }
 }
+public function showById(Request $request){
+    
+
+}
 }

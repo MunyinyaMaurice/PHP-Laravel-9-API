@@ -29,3 +29,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('studentsApi',[studentContraller::class,'index']);
 Route::post('studentsApi',[studentContraller::class,'store']);
+Route::get('studentsApi/{id}',[studentContraller::class,'showById']);
