@@ -53,8 +53,16 @@ return response() ->json(['status'=>500,
     }
 }
 }
-public function showById(Request $request){
-    
-
+public function showById($id){
+$student = studentModel::find($id);
+if ($student){
+return response()->json([
+'status'=>200,'we have this student'=>$student
+],200);
+}else{
+return response() ->json([
+'status'=>404,
+'error message'=>"There is no such student!"],404);
+}
 }
 }
