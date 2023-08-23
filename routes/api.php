@@ -31,3 +31,4 @@ Route::get('studentsApi',[studentContraller::class,'index']);
 Route::post('studentsApi',[studentContraller::class,'store']);
 Route::get('studentsApi/{id}',[studentContraller::class,'showById']);
 Route::put('studentsApi/{id}/update',[studentContraller::class,'updateById']);
+Route::delete('studentsApi/{id}/delete',[studentContraller::class,'deleteById']);

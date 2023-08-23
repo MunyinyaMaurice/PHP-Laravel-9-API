@@ -102,4 +102,17 @@ public function updateById(Request $request, $id) {
         return $showResponse;
     }
 }
+public function deleteById($id){
+$student= studentModel::find($id);
+    if ($student){
+        $student ->delete();
+        return response() ->json([
+            'status' =>200,
+            'message' =>'The record has been deleted'],200);
+    }else{
+        return response()->json([
+            'status' =>500,
+            'error' =>'Something went wrong'],500);
+    }
+  }
 }
